@@ -1,0 +1,94 @@
+{
+    "editor.fontSize": 16,
+    "editor.fontFamily": "'Cascadia Mono', Consolas, 'Courier New', monospace",
+    "actionButtons": {
+        "commands": [
+            {
+                "cwd": "${workspaceFolder}",
+                "name": "\ud83e\udd79Rebuild",
+                "color": "white",
+                "singleInstance": true,
+                "saveAll": true,
+                "command": ".vscode/Uv4Caller.exe -o ${workspaceFolder}/build/build.log -c 'UV4 -r ${workspaceFolder}/project.uvprojx -j0'"
+            },
+            {
+                "cwd": "${workspaceFolder}",
+                "name": "\ud83e\udd70Flash",
+                "color": "white",
+                "singleInstance": true,
+                "command": ".vscode/Uv4Caller.exe -o ${workspaceFolder}/build/build.log -c 'UV4 -f ${workspaceFolder}/project.uvprojx -j0'"
+            },
+            {
+                "cwd": "${workspaceFolder}",
+                "name": "\ud83d\udc25Run Keil",
+                "color": "white",
+                "singleInstance": true,
+                "command": "UV4 ${workspaceFolder}/project.uvprojx"
+            },
+            {
+                "cwd": "${workspaceFolder}",
+                "name": "\ud83e\udd14RTT Viewer",
+                "color": "white",
+                "singleInstance": true,
+                "command": "openocd -f ./openocd_daplink.cfg -f ./openocd_rtt.cfg & telnet localhost 8888"
+            },
+            {
+                "cwd": "${workspaceFolder}",
+                "name": "\ud83e\uddd0Monitor",
+                "color": "white",
+                "singleInstance": true,
+                "command": ".vscode/monitor.ps1"
+            }
+        ],
+        "defaultColor": "white",
+        "reloadButton": "\ud83e\udee1",
+        "loadNpmCommands": false
+    },
+    "files.associations": {
+        "board.h": "c",
+        "gd32f30x.h": "c",
+        "drv_gpio.h": "c",
+        "rtdevice.h": "c",
+        "rtthread.h": "c",
+        "rtm.h": "c",
+        "rtconfig.h": "c",
+        "rtservice.h": "c",
+        "rtklibc.h": "c",
+        "rtatomic.h": "c",
+        "rtdef.h": "c",
+        "stm32f4xx.h": "c",
+        "stm32f4xx_hal.h": "c",
+        "stdbool.h": "c",
+        "rtdbg.h": "c"
+    },
+    "C_Cpp.default.includePath": [
+        "rt-thread\\libcpu\\arm\\cortex-m4",
+        "rt-thread\\components\\libc\\compilers\\common\\extension\\fcntl\\octal",
+        "applications",
+        "board",
+        "rt-thread\\components\\libc\\compilers\\common\\include",
+        ".\\libraries\\gd32_drivers",
+        ".\\libraries\\GD32F30x_Firmware_Library\\CMSIS",
+        "rt-thread\\components\\finsh",
+        "rt-thread\\components\\drivers\\include",
+        "rt-thread\\libcpu\\arm\\common",
+        "rt-thread\\include",
+        "rt-thread\\components\\libc\\posix\\io\\eventfd",
+        "rt-thread\\components\\libc\\posix\\io\\poll",
+        ".\\libraries\\GD32F30x_Firmware_Library\\CMSIS\\GD\\GD32F30x\\Include",
+        "rt-thread\\components\\libc\\compilers\\common\\extension",
+        "rt-thread\\components\\libc\\posix\\io\\epoll",
+        ".",
+        "rt-thread\\components\\libc\\posix\\ipc",
+        ".\\libraries\\GD32F30x_Firmware_Library\\GD32F30x_standard_peripheral\\Include"
+    ],
+    "C_Cpp.default.defines": [
+        "__STDC_LIMIT_MACROS",
+        "RT_USING_ARMLIBC",
+        "USE_STDPERIPH_DRIVER",
+        "RT_USING_LIBC",
+        "__CLK_TCK=RT_TICK_PER_SECOND",
+        "GD32F30X_XD",
+        "__RTTHREAD__"
+    ]
+}
