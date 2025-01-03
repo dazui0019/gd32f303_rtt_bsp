@@ -62,33 +62,34 @@
         "rtdbg.h": "c"
     },
     "C_Cpp.default.includePath": [
-        "rt-thread\\libcpu\\arm\\cortex-m4",
         "rt-thread\\components\\libc\\compilers\\common\\extension\\fcntl\\octal",
-        "applications",
-        "board",
-        "rt-thread\\components\\libc\\compilers\\common\\include",
-        ".\\libraries\\gd32_drivers",
-        ".\\libraries\\GD32F30x_Firmware_Library\\CMSIS",
-        "rt-thread\\components\\finsh",
         "rt-thread\\components\\drivers\\include",
+        "rt-thread\\bsp\\gd32\\arm\\libraries\\GD32F30x_Firmware_Library\\CMSIS",
+        "applications",
         "rt-thread\\libcpu\\arm\\common",
+        "rt-thread\\components\\libc\\posix\\ipc",
         "rt-thread\\include",
+        "rt-thread\\components\\libc\\compilers\\common\\include",
+        "rt-thread\\components\\drivers\\spi",
+        "rt-thread\\libcpu\\arm\\cortex-m4",
+        "rt-thread\\components\\libc\\compilers\\common\\extension",
+        "rt-thread\\bsp\\gd32\\arm\\libraries\\GD32F30x_Firmware_Library\\GD32F30x_standard_peripheral\\Include",
+        "rt-thread\\components\\finsh",
+        "rt-thread\\bsp\\gd32\\arm\\libraries\\gd32_drivers",
+        "rt-thread\\bsp\\gd32\\arm\\libraries\\GD32F30x_Firmware_Library\\CMSIS\\GD\\GD32F30x\\Include",
+        "rt-thread\\components\\libc\\posix\\io\\epoll",
+        "board",
         "rt-thread\\components\\libc\\posix\\io\\eventfd",
         "rt-thread\\components\\libc\\posix\\io\\poll",
-        ".\\libraries\\GD32F30x_Firmware_Library\\CMSIS\\GD\\GD32F30x\\Include",
-        "rt-thread\\components\\libc\\compilers\\common\\extension",
-        "rt-thread\\components\\libc\\posix\\io\\epoll",
-        ".",
-        "rt-thread\\components\\libc\\posix\\ipc",
-        ".\\libraries\\GD32F30x_Firmware_Library\\GD32F30x_standard_peripheral\\Include"
+        "."
     ],
     "C_Cpp.default.defines": [
-        "__STDC_LIMIT_MACROS",
-        "RT_USING_ARMLIBC",
-        "USE_STDPERIPH_DRIVER",
         "RT_USING_LIBC",
+        "__STDC_LIMIT_MACROS",
+        "__RTTHREAD__",
+        "USE_STDPERIPH_DRIVER",
+        "RT_USING_ARMLIBC",
         "__CLK_TCK=RT_TICK_PER_SECOND",
-        "GD32F30X_XD",
-        "__RTTHREAD__"
+        "GD32F30X_HD"
     ]
 }
