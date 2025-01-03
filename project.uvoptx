@@ -463,7 +463,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Source\ARM\startup_gd32f30x_xd.s</PathWithFileName>
+      <PathWithFileName>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Source\ARM\startup_gd32f30x_xd.s</PathWithFileName>
       <FilenameWithoutPath>startup_gd32f30x_xd.s</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -475,7 +475,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\libraries\gd32_drivers\drv_gpio.c</PathWithFileName>
+      <PathWithFileName>rt-thread\bsp\gd32\arm\libraries\gd32_drivers\drv_gpio.c</PathWithFileName>
       <FilenameWithoutPath>drv_gpio.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -487,7 +487,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\libraries\gd32_drivers\drv_usart.c</PathWithFileName>
+      <PathWithFileName>rt-thread\bsp\gd32\arm\libraries\gd32_drivers\drv_usart.c</PathWithFileName>
       <FilenameWithoutPath>drv_usart.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -807,7 +807,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Source\system_gd32f30x.c</PathWithFileName>
+      <PathWithFileName>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Source\system_gd32f30x.c</PathWithFileName>
       <FilenameWithoutPath>system_gd32f30x.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -819,7 +819,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_rcu.c</PathWithFileName>
+      <PathWithFileName>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_rcu.c</PathWithFileName>
       <FilenameWithoutPath>gd32f30x_rcu.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -831,7 +831,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_usart.c</PathWithFileName>
+      <PathWithFileName>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_usart.c</PathWithFileName>
       <FilenameWithoutPath>gd32f30x_usart.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -843,7 +843,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_exti.c</PathWithFileName>
+      <PathWithFileName>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_exti.c</PathWithFileName>
       <FilenameWithoutPath>gd32f30x_exti.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -855,7 +855,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_gpio.c</PathWithFileName>
+      <PathWithFileName>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_gpio.c</PathWithFileName>
       <FilenameWithoutPath>gd32f30x_gpio.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -867,7 +867,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_misc.c</PathWithFileName>
+      <PathWithFileName>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_misc.c</PathWithFileName>
       <FilenameWithoutPath>gd32f30x_misc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

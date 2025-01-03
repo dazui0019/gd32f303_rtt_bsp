@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>__STDC_LIMIT_MACROS, RT_USING_ARMLIBC, USE_STDPERIPH_DRIVER, RT_USING_LIBC, __CLK_TCK=RT_TICK_PER_SECOND, GD32F30X_XD, __RTTHREAD__</Define>
               <Undefine></Undefine>
-              <IncludePath>rt-thread\libcpu\arm\cortex-m4;rt-thread\components\libc\compilers\common\extension\fcntl\octal;applications;board;rt-thread\components\libc\compilers\common\include;.\libraries\gd32_drivers;.\libraries\GD32F30x_Firmware_Library\CMSIS;rt-thread\components\finsh;rt-thread\components\drivers\include;rt-thread\libcpu\arm\common;rt-thread\components\drivers\include;rt-thread\include;rt-thread\components\libc\posix\io\eventfd;rt-thread\components\libc\posix\io\poll;rt-thread\components\drivers\include;.\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Include;rt-thread\components\libc\compilers\common\extension;rt-thread\components\drivers\include;rt-thread\components\libc\posix\io\epoll;.;rt-thread\components\libc\posix\ipc;.\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Include</IncludePath>
+              <IncludePath>rt-thread\libcpu\arm\cortex-m4;rt-thread\components\libc\compilers\common\extension\fcntl\octal;applications;board;rt-thread\components\libc\compilers\common\include;rt-thread\bsp\gd32\arm\libraries\gd32_drivers;rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS;rt-thread\components\finsh;rt-thread\components\drivers\include;rt-thread\libcpu\arm\common;rt-thread\components\drivers\include;rt-thread\include;rt-thread\components\libc\posix\io\eventfd;rt-thread\components\libc\posix\io\poll;rt-thread\components\drivers\include;rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Include;rt-thread\components\libc\compilers\common\extension;rt-thread\components\drivers\include;rt-thread\components\libc\posix\io\epoll;.;rt-thread\components\libc\posix\ipc;rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1068,17 +1068,17 @@
             <File>
               <FileName>startup_gd32f30x_xd.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Source\ARM\startup_gd32f30x_xd.s</FilePath>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Source\ARM\startup_gd32f30x_xd.s</FilePath>
             </File>
             <File>
               <FileName>drv_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\libraries\gd32_drivers\drv_gpio.c</FilePath>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\gd32_drivers\drv_gpio.c</FilePath>
             </File>
             <File>
               <FileName>drv_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\libraries\gd32_drivers\drv_usart.c</FilePath>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\gd32_drivers\drv_usart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1983,32 +1983,32 @@
             <File>
               <FileName>system_gd32f30x.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Source\system_gd32f30x.c</FilePath>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Source\system_gd32f30x.c</FilePath>
             </File>
             <File>
               <FileName>gd32f30x_rcu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_rcu.c</FilePath>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_rcu.c</FilePath>
             </File>
             <File>
               <FileName>gd32f30x_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_usart.c</FilePath>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_usart.c</FilePath>
             </File>
             <File>
               <FileName>gd32f30x_exti.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_exti.c</FilePath>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_exti.c</FilePath>
             </File>
             <File>
               <FileName>gd32f30x_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_gpio.c</FilePath>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_gpio.c</FilePath>
             </File>
             <File>
               <FileName>gd32f30x_misc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_misc.c</FilePath>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_misc.c</FilePath>
             </File>
           </Files>
         </Group>
