@@ -14,16 +14,16 @@
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>GD32F303CG</Device>
+          <Device>GD32F303ZE</Device>
           <Vendor>GigaDevice</Vendor>
           <PackID>GigaDevice.GD32F30x_DFP.2.2.1</PackID>
           <PackURL>https://gd32mcu.com/data/documents/pack/</PackURL>
-          <Cpu>IRAM(0x20000000,0x018000) IROM(0x08000000,0x0100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
+          <Cpu>IRAM(0x20000000,0x010000) IROM(0x08000000,0x080000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0GD32F30x_XD -FS08000000 -FL0100000 -FP0($$Device:GD32F303CG$Flash\GD32F30x_XD.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0GD32F30x_HD -FS08000000 -FL080000 -FP0($$Device:GD32F303ZE$Flash\GD32F30x_HD.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:GD32F303CG$Device\Include\gd32f30x.h</RegisterFile>
+          <RegisterFile>$$Device:GD32F303ZE$Device\Include\gd32f30x.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -33,7 +33,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:GD32F303CG$SVD\GD32F30x_XD.svd</SFDFile>
+          <SFDFile>$$Device:GD32F303ZE$SVD\GD32F30x_HD.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -138,7 +138,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -247,12 +247,12 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x18000</Size>
+                <Size>0x10000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x100000</Size>
+                <Size>0x80000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -277,7 +277,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x100000</Size>
+                <Size>0x80000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -302,7 +302,7 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x18000</Size>
+                <Size>0x10000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -317,7 +317,7 @@
             <Optim>4</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
-            <OneElfS>0</OneElfS>
+            <OneElfS>1</OneElfS>
             <Strict>0</Strict>
             <EnumInt>0</EnumInt>
             <PlainCh>0</PlainCh>
@@ -331,16 +331,16 @@
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
-            <vShortEn>1</vShortEn>
-            <vShortWch>1</vShortWch>
+            <vShortEn>0</vShortEn>
+            <vShortWch>0</vShortWch>
             <v6Lto>0</v6Lto>
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>__STDC_LIMIT_MACROS, RT_USING_ARMLIBC, USE_STDPERIPH_DRIVER, RT_USING_LIBC, __CLK_TCK=RT_TICK_PER_SECOND, GD32F30X_XD, __RTTHREAD__</Define>
+              <Define>RT_USING_LIBC, __STDC_LIMIT_MACROS, __RTTHREAD__, USE_STDPERIPH_DRIVER, RT_USING_ARMLIBC, __CLK_TCK=RT_TICK_PER_SECOND, GD32F30X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>rt-thread\libcpu\arm\cortex-m4;rt-thread\components\libc\compilers\common\extension\fcntl\octal;applications;board;rt-thread\components\libc\compilers\common\include;rt-thread\bsp\gd32\arm\libraries\gd32_drivers;rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS;rt-thread\components\finsh;rt-thread\components\drivers\include;rt-thread\libcpu\arm\common;rt-thread\components\drivers\include;rt-thread\include;rt-thread\components\libc\posix\io\eventfd;rt-thread\components\libc\posix\io\poll;rt-thread\components\drivers\include;rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Include;rt-thread\components\libc\compilers\common\extension;rt-thread\components\drivers\include;rt-thread\components\libc\posix\io\epoll;.;rt-thread\components\libc\posix\ipc;rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Include</IncludePath>
+              <IncludePath>rt-thread\components\libc\compilers\common\extension\fcntl\octal;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS;applications;rt-thread\libcpu\arm\common;rt-thread\components\libc\posix\ipc;rt-thread\include;rt-thread\components\drivers\include;rt-thread\components\libc\compilers\common\include;rt-thread\components\drivers\spi;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\drivers\include;rt-thread\components\libc\compilers\common\extension;rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Include;rt-thread\components\finsh;rt-thread\bsp\gd32\arm\libraries\gd32_drivers;rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Include;rt-thread\components\libc\posix\io\epoll;board;rt-thread\components\libc\posix\io\eventfd;rt-thread\components\libc\posix\io\poll;.</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1055,6 +1055,118 @@
                 </FileArmAds>
               </FileOption>
             </File>
+            <File>
+              <FileName>spi_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\spi\spi_core.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>1</IncludeInBuild>
+                  <AlwaysBuild>0</AlwaysBuild>
+                  <GenerateAssemblyFile>0</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>0</AssembleAssemblyFile>
+                  <PublicsOnly>0</PublicsOnly>
+                  <StopOnExitCode>3</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls> </MiscControls>
+                      <Define>__RT_IPC_SOURCE__</Define>
+                      <Undefine> </Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+            <File>
+              <FileName>spi_dev.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\spi\spi_dev.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>1</IncludeInBuild>
+                  <AlwaysBuild>0</AlwaysBuild>
+                  <GenerateAssemblyFile>0</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>0</AssembleAssemblyFile>
+                  <PublicsOnly>0</PublicsOnly>
+                  <StopOnExitCode>3</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls> </MiscControls>
+                      <Define>__RT_IPC_SOURCE__</Define>
+                      <Undefine> </Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1066,14 +1178,19 @@
               <FilePath>board\board.c</FilePath>
             </File>
             <File>
-              <FileName>startup_gd32f30x_xd.s</FileName>
+              <FileName>startup_gd32f30x_hd.s</FileName>
               <FileType>2</FileType>
-              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Source\ARM\startup_gd32f30x_xd.s</FilePath>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Source\ARM\startup_gd32f30x_hd.s</FilePath>
             </File>
             <File>
               <FileName>drv_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\bsp\gd32\arm\libraries\gd32_drivers\drv_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\gd32_drivers\drv_spi.c</FilePath>
             </File>
             <File>
               <FileName>drv_usart.c</FileName>
@@ -1086,9 +1203,9 @@
           <GroupName>Finsh</GroupName>
           <Files>
             <File>
-              <FileName>shell.c</FileName>
+              <FileName>cmd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\components\finsh\shell.c</FilePath>
+              <FilePath>rt-thread\components\finsh\cmd.c</FilePath>
             </File>
             <File>
               <FileName>msh.c</FileName>
@@ -1096,14 +1213,14 @@
               <FilePath>rt-thread\components\finsh\msh.c</FilePath>
             </File>
             <File>
+              <FileName>shell.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\finsh\shell.c</FilePath>
+            </File>
+            <File>
               <FileName>msh_parse.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\finsh\msh_parse.c</FilePath>
-            </File>
-            <File>
-              <FileName>cmd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\finsh\cmd.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1981,24 +2098,14 @@
           <GroupName>Libraries</GroupName>
           <Files>
             <File>
+              <FileName>gd32f30x_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_spi.c</FilePath>
+            </File>
+            <File>
               <FileName>system_gd32f30x.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\CMSIS\GD\GD32F30x\Source\system_gd32f30x.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f30x_rcu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_rcu.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f30x_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>gd32f30x_exti.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_exti.c</FilePath>
             </File>
             <File>
               <FileName>gd32f30x_gpio.c</FileName>
@@ -2006,9 +2113,24 @@
               <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_gpio.c</FilePath>
             </File>
             <File>
+              <FileName>gd32f30x_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_exti.c</FilePath>
+            </File>
+            <File>
               <FileName>gd32f30x_misc.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_misc.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32f30x_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32f30x_rcu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\bsp\gd32\arm\libraries\GD32F30x_Firmware_Library\GD32F30x_standard_peripheral\Source\gd32f30x_rcu.c</FilePath>
             </File>
           </Files>
         </Group>

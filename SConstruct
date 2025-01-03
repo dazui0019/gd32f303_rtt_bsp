@@ -5,7 +5,7 @@ import rtconfig
 if os.getenv('RTT_ROOT'):
     RTT_ROOT = os.getenv('RTT_ROOT')
 else:
-    RTT_ROOT = os.path.normpath(os.getcwd() + 'rt-thread')
+    RTT_ROOT = os.path.normpath(os.getcwd() + '/rt-thread')
 
 sys.path = sys.path + [os.path.join(RTT_ROOT, 'tools')]
 try:
@@ -34,12 +34,14 @@ if rtconfig.PLATFORM in ['iccarm']:
 Export('RTT_ROOT')
 Export('rtconfig')
 
-SDK_ROOT = os.path.abspath('./')
+# SDK_ROOT = os.path.abspath('./')
 
-if os.path.exists(SDK_ROOT + '/libraries'):
-    libraries_path_prefix = SDK_ROOT + '/libraries'
-else:
-    libraries_path_prefix = os.path.dirname(SDK_ROOT) + '/libraries'
+# if os.path.exists(SDK_ROOT + '/libraries'):
+#     libraries_path_prefix = SDK_ROOT + '/libraries'
+# else:
+#     libraries_path_prefix = os.path.dirname(SDK_ROOT) + '/libraries'
+
+libraries_path_prefix = RTT_ROOT + '/bsp/gd32/arm/libraries'
 
 SDK_LIB = libraries_path_prefix
 Export('SDK_LIB')
