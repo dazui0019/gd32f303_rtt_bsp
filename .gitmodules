@@ -1,0 +1,6 @@
+[submodule "rt-thread"]
+	path = rt-thread
+	url = git@github.com:RT-Thread/rt-thread.git
+[submodule "board/libraries/w25qxx"]
+	path = board/libraries/w25qxx
+	url = git@github.com:libdriver/w25qxx.git
