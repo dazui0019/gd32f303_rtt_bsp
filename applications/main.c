@@ -24,10 +24,8 @@ int main(void)
 
     /* set LED2 pin mode to output */
     rt_pin_mode(LED0_PIN, PIN_MODE_OUTPUT);
-    rt_pin_write(LED0_PIN, PIN_HIGH);
 
     w25qxx_basic_init(W25Q128, W25QXX_INTERFACE_SPI, W25QXX_BOOL_FALSE);
-    // w25qxx_interface_spi_qspi_init();
 
     while (count++)
     {
