@@ -62,7 +62,7 @@ static const struct gd32_spi spi_bus_obj[] = {
 #if defined SOC_SERIES_GD32F4xx
         GPIO_AF_5,
 #endif
-        GPIO_PIN_12,
+        GPIO_PIN_13,
         GPIO_PIN_14,
         GPIO_PIN_15,
     },
@@ -287,7 +287,6 @@ static rt_ssize_t spixfer(struct rt_spi_device* device, struct rt_spi_message* m
     struct rt_spi_bus * gd32_spi_bus = (struct rt_spi_bus *)device->bus;
     struct gd32_spi *spi_device = (struct gd32_spi *)gd32_spi_bus->parent.user_data;
     struct rt_spi_configuration * config = &device->config;
-    struct gd32_spi_cs * gd32_spi_cs = device->parent.user_data;
     uint32_t spi_periph = spi_device->spi_periph;
 
     RT_ASSERT(device != NULL);
@@ -296,7 +295,7 @@ static rt_ssize_t spixfer(struct rt_spi_device* device, struct rt_spi_message* m
     /* take CS */
     if(message->cs_take)
     {
-        gpio_bit_reset(gd32_spi_cs->GPIOx, gd32_spi_cs->GPIO_Pin);
+        GPIO_BC(PIN_GDPORT(device->cs_pin)) = PIN_GDPIN(device->cs_pin);
         LOG_D("spi take cs\n");
     }
 
@@ -372,7 +371,7 @@ static rt_ssize_t spixfer(struct rt_spi_device* device, struct rt_spi_message* m
     /* release CS */
     if(message->cs_release)
     {
-        gpio_bit_set(gd32_spi_cs->GPIOx, gd32_spi_cs->GPIO_Pin);
+        GPIO_BOP(PIN_GDPORT(device->cs_pin)) = PIN_GDPIN(device->cs_pin);
         LOG_D("spi release cs\n");
     }
 
@@ -401,7 +400,7 @@ rt_err_t rt_hw_spi_device_attach(const char *bus_name, const char *device_name, 
         rt_pin_write(cs_pin, PIN_HIGH);
     }
 
-    result = rt_spi_bus_attach_device(spi_device, device_name, bus_name, (void *)cs_pin);
+    result = rt_spi_bus_attach_device_cspin(spi_device, device_name, bus_name, cs_pin, RT_NULL);
 
     if (result != RT_EOK)
     {
