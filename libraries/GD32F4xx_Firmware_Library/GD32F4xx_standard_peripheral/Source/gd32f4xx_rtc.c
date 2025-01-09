@@ -2,14 +2,11 @@
     \file    gd32f4xx_rtc.c
     \brief   RTC driver
 
-    \version 2016-08-15, V1.0.0, firmware for GD32F4xx
-    \version 2018-12-12, V2.0.0, firmware for GD32F4xx
-    \version 2020-09-30, V2.1.0, firmware for GD32F4xx
-    \version 2022-03-09, V3.0.0, firmware for GD32F4xx
+    \version 2024-01-15, V3.2.0, firmware for GD32F4xx
 */
 
 /*
-    Copyright (c) 2022, GigaDevice Semiconductor Inc.
+    Copyright (c) 2024, GigaDevice Semiconductor Inc.
 
     Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -68,7 +65,7 @@ ErrStatus rtc_deinit(void)
     error_status = rtc_init_mode_enter();
 
     if(ERROR != error_status) {
-        /* reset RTC_CTL register, but RTC_CTL[2:0] */
+        /* reset RTC_CTL register, but RTC_CTL[2��0] */
         RTC_CTL &= (RTC_REGISTER_RESET | RTC_CTL_WTCS);
         /* before reset RTC_TIME and RTC_DATE, BPSHAD bit in RTC_CTL should be reset as the condition.
            in order to read calendar from shadow register, not the real registers being reset */
@@ -76,7 +73,7 @@ ErrStatus rtc_deinit(void)
         RTC_DATE = RTC_DATE_RESET;
 
         RTC_PSC = RTC_PSC_RESET;
-        /* only when RTC_CTL_WTEN=0 and RTC_STAT_WTWF=1 can write RTC_CTL[2:0] */
+        /* only when RTC_CTL_WTEN=0 and RTC_STAT_WTWF=1 can write RTC_CTL[2��0] */
         /* wait until the WTWF flag to be set */
         do {
             flag_status = RTC_STAT & RTC_STAT_WTWF;
@@ -150,7 +147,12 @@ ErrStatus rtc_init(rtc_parameter_struct *rtc_initpara_struct)
     RTC_WPK = RTC_UNLOCK_KEY2;
 
     /* 2nd: enter init mode */
-    error_status = rtc_init_mode_enter();
+      RTC_ALRM0TD = 0XFFFF;
+      RTC_ALRM1TD = 0XFFFF;
+      RTC_ALRM0SS = 0X0022;
+      RTC_ALRM1SS = 0X0022;
+error_status = rtc_init_mode_enter();
+
 
     if(ERROR != error_status) {
         RTC_PSC = (uint32_t)(PSC_FACTOR_A(rtc_initpara_struct->factor_asyn) | \
@@ -1095,7 +1097,7 @@ ErrStatus rtc_wakeup_clock_set(uint8_t wakeup_clock)
     /* disable the write protection */
     RTC_WPK = RTC_UNLOCK_KEY1;
     RTC_WPK = RTC_UNLOCK_KEY2;
-    /* only when RTC_CTL_WTEN=0 and RTC_STAT_WTWF=1 can write RTC_CTL[2:0] */
+    /* only when RTC_CTL_WTEN=0 and RTC_STAT_WTWF=1 can write RTC_CTL[2��0] */
     /* wait until the WTWF flag to be set */
     do {
         flag_status = RTC_STAT & RTC_STAT_WTWF;

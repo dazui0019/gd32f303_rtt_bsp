@@ -2,33 +2,33 @@
     \file    usbh_enum.c
     \brief   USB host mode enumeration driver
 
-    \version 2020-08-01, V3.0.0, firmware for GD32F30x
+    \version 2023-06-30, V2.1.6, firmware for GD32F30x
 */
 
 /*
-    Copyright (c) 2020, GigaDevice Semiconductor Inc.
+    Copyright (c) 2023, GigaDevice Semiconductor Inc.
 
-    Redistribution and use in source and binary forms, with or without modification,
+    Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this
+    1. Redistributions of source code must retain the above copyright notice, this 
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice,
-       this list of conditions and the following disclaimer in the documentation
+    2. Redistributions in binary form must reproduce the above copyright notice, 
+       this list of conditions and the following disclaimer in the documentation 
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors
-       may be used to endorse or promote products derived from this software without
+    3. Neither the name of the copyright holder nor the names of its contributors 
+       may be used to endorse or promote products derived from this software without 
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
 OF SUCH DAMAGE.
 */
 
@@ -111,11 +111,11 @@ usbh_status usbh_cfgdesc_get (usbh_host *puhost, uint16_t len)
 
     usbh_control *usb_ctl = &puhost->control;
 
-#if (USBH_KEEP_CFG_DESCRIPTOR == 1U)
+#if (USBH_CFG_DESC_KEEP == 1U)
     pdata = puhost->dev_prop.cfgdesc_rawdata;
 #else
     pdata = puhost->dev_prop.data;
-#endif
+#endif /* USBH_CFG_DESC_KEEP */
 
     if (CTL_IDLE == usb_ctl->ctl_state) {
         usb_ctl->setup.req = (usb_req) {
@@ -152,8 +152,8 @@ usbh_status usbh_cfgdesc_get (usbh_host *puhost, uint16_t len)
     \retval     operation status
 */
 usbh_status usbh_strdesc_get (usbh_host *puhost,
-                              uint8_t str_index,
-                              uint8_t *buf,
+                              uint8_t str_index, 
+                              uint8_t *buf, 
                               uint16_t len)
 {
     usbh_status status = USBH_BUSY;
@@ -297,7 +297,7 @@ usbh_status usbh_setdevfeature (usbh_host *puhost, uint8_t feature_selector, uin
         };
 
         usbh_ctlstate_config (puhost, NULL, 0U);
-    }
+    } 
 
     status = usbh_ctl_handler (puhost);
 
@@ -343,7 +343,7 @@ usbh_status usbh_clrdevfeature (usbh_host *puhost, uint8_t feature_selector, uin
     \param[out] none
     \retval     operation status
 */
-usbh_status usbh_clrfeature (usbh_host *puhost, uint8_t ep_addr, uint8_t pp_num)
+usbh_status usbh_clrfeature (usbh_host *puhost, uint8_t ep_addr, uint8_t pp_num) 
 {
     usbh_status status = USBH_BUSY;
     usbh_control *usb_ctl = &puhost->control;
@@ -365,7 +365,7 @@ usbh_status usbh_clrfeature (usbh_host *puhost, uint8_t ep_addr, uint8_t pp_num)
         }
 
         usbh_ctlstate_config (puhost, NULL, 0U);
-    }
+    } 
 
     status = usbh_ctl_handler (puhost);
 
@@ -688,6 +688,6 @@ static void usbh_strdesc_parse (uint8_t *psrc, uint8_t *pdest, uint16_t len)
             pdest++;
         }
 
-        *pdest = 0U; /* mark end of string */
+        *pdest = 0U; /* mark end of string */  
     }
 }

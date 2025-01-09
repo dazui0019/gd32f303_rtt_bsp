@@ -2,33 +2,33 @@
     \file    cdc_acm_core.c
     \brief   CDC ACM driver
 
-    \version 2020-08-01, V3.0.0, firmware for GD32F30x
+    \version 2023-06-30, V2.1.6, firmware for GD32F30x
 */
 
 /*
-    Copyright (c) 2020, GigaDevice Semiconductor Inc.
+    Copyright (c) 2023, GigaDevice Semiconductor Inc.
 
-    Redistribution and use in source and binary forms, with or without modification,
+    Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this
+    1. Redistributions of source code must retain the above copyright notice, this 
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice,
-       this list of conditions and the following disclaimer in the documentation
+    2. Redistributions in binary form must reproduce the above copyright notice, 
+       this list of conditions and the following disclaimer in the documentation 
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors
-       may be used to endorse or promote products derived from this software without
+    3. Neither the name of the copyright holder nor the names of its contributors 
+       may be used to endorse or promote products derived from this software without 
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
 OF SUCH DAMAGE.
 */
 
@@ -42,9 +42,9 @@ OF SUCH DAMAGE.
 /* USB standard device descriptor */
 usb_desc_dev cdc_dev_desc =
 {
-    .header =
+    .header = 
      {
-         .bLength          = USB_DEV_DESC_LEN,
+         .bLength          = USB_DEV_DESC_LEN, 
          .bDescriptorType  = USB_DESCTYPE_DEV,
      },
     .bcdUSB                = 0x0200U,
@@ -62,13 +62,13 @@ usb_desc_dev cdc_dev_desc =
 };
 
 /* USB device configuration descriptor */
-usb_cdc_desc_config_set cdc_config_desc =
+usb_cdc_desc_config_set cdc_config_desc = 
 {
-    .config =
+    .config = 
     {
-        .header =
+        .header = 
          {
-             .bLength         = sizeof(usb_desc_config),
+             .bLength         = sizeof(usb_desc_config), 
              .bDescriptorType = USB_DESCTYPE_CONFIG,
          },
         .wTotalLength         = USB_CDC_ACM_CONFIG_DESC_SIZE,
@@ -79,12 +79,12 @@ usb_cdc_desc_config_set cdc_config_desc =
         .bMaxPower            = 0x32U
     },
 
-    .cmd_itf =
+    .cmd_itf = 
     {
-        .header =
+        .header = 
          {
-             .bLength         = sizeof(usb_desc_itf),
-             .bDescriptorType = USB_DESCTYPE_ITF
+             .bLength         = sizeof(usb_desc_itf), 
+             .bDescriptorType = USB_DESCTYPE_ITF 
          },
         .bInterfaceNumber     = 0x00U,
         .bAlternateSetting    = 0x00U,
@@ -95,22 +95,22 @@ usb_cdc_desc_config_set cdc_config_desc =
         .iInterface           = 0x00U
     },
 
-    .cdc_header =
+    .cdc_header = 
     {
         .header =
          {
-            .bLength         = sizeof(usb_desc_header_func),
+            .bLength         = sizeof(usb_desc_header_func), 
             .bDescriptorType = USB_DESCTYPE_CS_INTERFACE
          },
         .bDescriptorSubtype  = 0x00U,
         .bcdCDC              = 0x0110U
     },
 
-    .cdc_call_managment =
+    .cdc_call_managment = 
     {
-        .header =
+        .header = 
          {
-            .bLength         = sizeof(usb_desc_call_managment_func),
+            .bLength         = sizeof(usb_desc_call_managment_func), 
             .bDescriptorType = USB_DESCTYPE_CS_INTERFACE
          },
         .bDescriptorSubtype  = 0x01U,
@@ -118,22 +118,22 @@ usb_cdc_desc_config_set cdc_config_desc =
         .bDataInterface      = 0x01U
     },
 
-    .cdc_acm =
+    .cdc_acm = 
     {
-        .header =
+        .header = 
          {
-            .bLength         = sizeof(usb_desc_acm_func),
+            .bLength         = sizeof(usb_desc_acm_func), 
             .bDescriptorType = USB_DESCTYPE_CS_INTERFACE
          },
         .bDescriptorSubtype  = 0x02U,
         .bmCapabilities      = 0x02U,
     },
 
-    .cdc_union =
+    .cdc_union = 
     {
-        .header =
+        .header = 
          {
-            .bLength         = sizeof(usb_desc_union_func),
+            .bLength         = sizeof(usb_desc_union_func), 
             .bDescriptorType = USB_DESCTYPE_CS_INTERFACE
          },
         .bDescriptorSubtype  = 0x06U,
@@ -141,11 +141,11 @@ usb_cdc_desc_config_set cdc_config_desc =
         .bSlaveInterface0    = 0x01U,
     },
 
-    .cdc_cmd_endpoint =
+    .cdc_cmd_endpoint = 
     {
-        .header =
+        .header = 
          {
-            .bLength         = sizeof(usb_desc_ep),
+            .bLength         = sizeof(usb_desc_ep), 
             .bDescriptorType = USB_DESCTYPE_EP,
          },
         .bEndpointAddress    = CDC_CMD_EP,
@@ -154,11 +154,11 @@ usb_cdc_desc_config_set cdc_config_desc =
         .bInterval           = 0x0AU
     },
 
-    .cdc_data_interface =
+    .cdc_data_interface = 
     {
-        .header =
+        .header = 
          {
-            .bLength         = sizeof(usb_desc_itf),
+            .bLength         = sizeof(usb_desc_itf), 
             .bDescriptorType = USB_DESCTYPE_ITF,
          },
         .bInterfaceNumber    = 0x01U,
@@ -170,12 +170,12 @@ usb_cdc_desc_config_set cdc_config_desc =
         .iInterface          = 0x00U
     },
 
-    .cdc_out_endpoint =
+    .cdc_out_endpoint = 
     {
-        .header =
+        .header = 
          {
-             .bLength         = sizeof(usb_desc_ep),
-             .bDescriptorType = USB_DESCTYPE_EP,
+             .bLength         = sizeof(usb_desc_ep), 
+             .bDescriptorType = USB_DESCTYPE_EP, 
          },
         .bEndpointAddress     = CDC_OUT_EP,
         .bmAttributes         = USB_EP_ATTR_BULK,
@@ -183,12 +183,12 @@ usb_cdc_desc_config_set cdc_config_desc =
         .bInterval            = 0x00U
     },
 
-    .cdc_in_endpoint =
+    .cdc_in_endpoint = 
     {
-        .header =
+        .header = 
          {
-             .bLength         = sizeof(usb_desc_ep),
-             .bDescriptorType = USB_DESCTYPE_EP
+             .bLength         = sizeof(usb_desc_ep), 
+             .bDescriptorType = USB_DESCTYPE_EP 
          },
         .bEndpointAddress     = CDC_IN_EP,
         .bmAttributes         = USB_EP_ATTR_BULK,
@@ -198,50 +198,50 @@ usb_cdc_desc_config_set cdc_config_desc =
 };
 
 /* USB language ID descriptor */
-static usb_desc_LANGID usbd_language_id_desc =
+static usb_desc_LANGID usbd_language_id_desc = 
 {
-    .header =
+    .header = 
      {
-         .bLength         = sizeof(usb_desc_LANGID),
+         .bLength         = sizeof(usb_desc_LANGID), 
          .bDescriptorType = USB_DESCTYPE_STR,
      },
     .wLANGID              = ENG_LANGID
 };
 
 /* USB manufacture string */
-static usb_desc_str manufacturer_string =
+static usb_desc_str manufacturer_string = 
 {
-    .header =
+    .header = 
      {
-         .bLength         = USB_STRING_LEN(10U),
+         .bLength         = USB_STRING_LEN(10U), 
          .bDescriptorType = USB_DESCTYPE_STR,
      },
     .unicode_string = {'G', 'i', 'g', 'a', 'D', 'e', 'v', 'i', 'c', 'e'}
 };
 
 /* USB product string */
-static usb_desc_str product_string =
+static usb_desc_str product_string = 
 {
-    .header =
+    .header = 
      {
-         .bLength         = USB_STRING_LEN(12U),
+         .bLength         = USB_STRING_LEN(12U), 
          .bDescriptorType = USB_DESCTYPE_STR,
      },
     .unicode_string = {'G', 'D', '3', '2', '-', 'C', 'D', 'C', '_', 'A', 'C', 'M'}
 };
 
 /* USBD serial string */
-static usb_desc_str serial_string =
+static usb_desc_str serial_string = 
 {
-    .header =
+    .header = 
      {
-         .bLength         = USB_STRING_LEN(12U),
+         .bLength         = USB_STRING_LEN(12U), 
          .bDescriptorType = USB_DESCTYPE_STR,
      }
 };
 
 /* USB string descriptor set */
-uint8_t* usbd_cdc_strings[] =
+uint8_t* usbd_cdc_strings[] = 
 {
     [STR_IDX_LANGID]  = (uint8_t *)&usbd_language_id_desc,
     [STR_IDX_MFC]     = (uint8_t *)&manufacturer_string,
@@ -278,7 +278,7 @@ usb_class cdc_class = {
     \brief      receive CDC ACM data
     \param[in]  udev: pointer to USB device instance
     \param[out] none
-    \retval     USB device operation status
+    \retval     none
 */
 void cdc_acm_data_receive(usb_dev *udev)
 {
@@ -294,7 +294,7 @@ void cdc_acm_data_receive(usb_dev *udev)
     \brief      send CDC ACM data
     \param[in]  udev: pointer to USB device instance
     \param[out] none
-    \retval     USB device operation status
+    \retval     none
 */
 void cdc_acm_data_send (usb_dev *udev)
 {
@@ -351,7 +351,7 @@ static uint8_t cdc_acm_init (usb_dev *udev, uint8_t config_index)
     /* initialize cdc handler structure */
     cdc_handler.packet_receive = 0U;
     cdc_handler.packet_sent = 1U;
-    cdc_handler.pre_packet_send = 1U;
+    cdc_handler.pre_packet_send = 1U; 
     cdc_handler.receive_length = 0U;
 
     cdc_handler.line_coding = (acm_line){
@@ -367,7 +367,7 @@ static uint8_t cdc_acm_init (usb_dev *udev, uint8_t config_index)
 }
 
 /*!
-    \brief      de-initialize the CDC ACM device
+    \brief      deinitialize the CDC ACM device
     \param[in]  udev: pointer to USB device instance
     \param[in]  config_index: configuration index
     \param[out] none
@@ -405,13 +405,12 @@ static uint8_t cdc_acm_ctlx_out (usb_dev *udev)
     return USBD_OK;
 }
 
-
 /*!
     \brief      handle CDC ACM data in transaction
     \param[in]  udev: pointer to USB device instance
     \param[in]  ep_num: endpoint number
     \param[out] none
-    \retval     USB device operation status
+    \retval     none
 */
 static void cdc_acm_data_in (usb_dev *udev, uint8_t ep_num)
 {
@@ -431,7 +430,7 @@ static void cdc_acm_data_in (usb_dev *udev, uint8_t ep_num)
     \param[in]  udev: pointer to USB device instance
     \param[in]  ep_num: endpoint number
     \param[out] none
-    \retval     USB device operation status
+    \retval     none
 */
 static void cdc_acm_data_out (usb_dev *udev, uint8_t ep_num)
 {

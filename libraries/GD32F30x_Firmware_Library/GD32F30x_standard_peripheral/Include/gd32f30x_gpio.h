@@ -2,36 +2,33 @@
     \file    gd32f30x_gpio.h
     \brief   definitions for the GPIO
 
-    \version 2017-02-10, V1.0.0, firmware for GD32F30x
-    \version 2018-10-10, V1.1.0, firmware for GD32F30x
-    \version 2018-12-25, V2.0.0, firmware for GD32F30x
-    \version 2020-09-30, V2.1.0, firmware for GD32F30x
+    \version 2023-12-30, V2.2.0, firmware for GD32F30x
 */
 
 /*
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
-    Redistribution and use in source and binary forms, with or without modification,
+    Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this
+    1. Redistributions of source code must retain the above copyright notice, this 
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice,
-       this list of conditions and the following disclaimer in the documentation
+    2. Redistributions in binary form must reproduce the above copyright notice, 
+       this list of conditions and the following disclaimer in the documentation 
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors
-       may be used to endorse or promote products derived from this software without
+    3. Neither the name of the copyright holder nor the names of its contributors 
+       may be used to endorse or promote products derived from this software without 
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
 OF SUCH DAMAGE.
 */
 
@@ -75,7 +72,7 @@ OF SUCH DAMAGE.
 
 /* bits definitions */
 /* GPIO_CTL0 */
-#define GPIO_CTL0_MD0              BITS(0,1)                 /*!< port 0 mode bits */
+#define GPIO_CTL0_MD0              BITS(0,1)                 /*!< port 0 mode bits */ 
 #define GPIO_CTL0_CTL0             BITS(2,3)                 /*!< pin 0 configuration bits */
 #define GPIO_CTL0_MD1              BITS(4,5)                 /*!< port 1 mode bits */
 #define GPIO_CTL0_CTL1             BITS(6,7)                 /*!< pin 1 configuration bits */
@@ -93,7 +90,7 @@ OF SUCH DAMAGE.
 #define GPIO_CTL0_CTL7             BITS(30,31)               /*!< pin 7 configuration bits */
 
 /* GPIO_CTL1 */
-#define GPIO_CTL1_MD8              BITS(0,1)                 /*!< port 8 mode bits */
+#define GPIO_CTL1_MD8              BITS(0,1)                 /*!< port 8 mode bits */ 
 #define GPIO_CTL1_CTL8             BITS(2,3)                 /*!< pin 8 configuration bits */
 #define GPIO_CTL1_MD9              BITS(4,5)                 /*!< port 9 mode bits */
 #define GPIO_CTL1_CTL9             BITS(6,7)                 /*!< pin 9 configuration bits */
@@ -260,10 +257,10 @@ OF SUCH DAMAGE.
 #define AFIO_PCF0_ENET_PHY_SEL           BIT(23)             /*!< ethernet MII or RMII PHY selection */
 #define AFIO_PCF0_SWJ_CFG                BITS(24,26)         /*!< serial wire JTAG configuration */
 #define AFIO_PCF0_SPI2_REMAP             BIT(28)             /*!< SPI2/I2S2 remapping */
-#define AFIO_PCF0_TIMER1ITR0_REMAP       BIT(29)             /*!< TIMER1 internal trigger 0 remapping */
+#define AFIO_PCF0_TIMER1ITI1_REMAP       BIT(29)             /*!< TIMER1 internal trigger 1 remapping */
 #define AFIO_PCF0_PTP_PPS_REMAP          BIT(30)             /*!< ethernet PTP PPS remapping */
 
-#else
+#else 
 /* memory map and bit definitions for GD32F30X_HD devices and GD32F30X_XD devices */
 #define AFIO_PCF0_SPI0_REMAP             BIT(0)              /*!< SPI0 remapping */
 #define AFIO_PCF0_I2C0_REMAP             BIT(1)              /*!< I2C0 remapping */
@@ -417,7 +414,7 @@ typedef FlagStatus bit_status;
 #define GPIO_PIN_ALL                     BITS(0,15)                /*!< GPIO pin all */
 
 /* AFIO remap mask */
-#define PCF0_USART2_REMAP(regval)       (BITS(4,5) & ((uint32_t)(regval) << 4))                           /*!< USART2 remapping */
+#define PCF0_USART2_REMAP(regval)       (BITS(4,5) & ((uint32_t)(regval) << 4))                           /*!< USART2 remapping */        
 #define PCF0_TIMER0_REMAP(regval)       (BITS(6,7) & ((uint32_t)(regval) << 6))                           /*!< TIMER0 remapping */
 #define PCF0_TIMER1_REMAP(regval)       (BITS(8,9) & ((uint32_t)(regval) << 8))                           /*!< TIMER1 remapping */
 #define PCF0_TIMER2_REMAP(regval)       (BITS(10,11) & ((uint32_t)(regval) << 10))                        /*!< TIMER2 remapping */
@@ -461,7 +458,7 @@ typedef FlagStatus bit_status;
 #define GPIO_CAN0_FULL_REMAP             ((uint32_t)0x001D0000U | PCF0_CAN_REMAP(3))                      /*!< CAN0 full remapping(only for GD32F30X_CL devices) */
 #define GPIO_ENET_REMAP                  ((uint32_t)0x00200000U | (AFIO_PCF0_ENET_REMAP >> 16))           /*!< ENET remapping(only for GD32F30X_CL devices) */
 #define GPIO_CAN1_REMAP                  ((uint32_t)0x00200000U | (AFIO_PCF0_CAN1_REMAP >> 16))           /*!< CAN1 remapping(only for GD32F30X_CL devices) */
-#define GPIO_TIMER1ITR0_REMAP            ((uint32_t)0x00200000U | (AFIO_PCF0_TIMER1ITR0_REMAP >> 16))     /*!< TIMER1 internal trigger 0 remapping(only for GD32F30X_CL devices) */
+#define GPIO_TIMER1ITI1_REMAP            ((uint32_t)0x00200000U | (AFIO_PCF0_TIMER1ITI1_REMAP >> 16))     /*!< TIMER1 internal trigger 1 remapping(only for GD32F30X_CL devices) */
 #define GPIO_PTP_PPS_REMAP               ((uint32_t)0x00200000U | (AFIO_PCF0_PTP_PPS_REMAP >> 16))        /*!< ethernet PTP PPS remapping(only for GD32F30X_CL devices) */
 #endif /* GD32F30X_CL */
 #define GPIO_TIMER8_REMAP                ((uint32_t)0x80000000U | AFIO_PCF1_TIMER8_REMAP)                 /*!< TIMER8 remapping */
@@ -529,7 +526,7 @@ void gpio_event_output_disable(void);
 /* lock GPIO pin bit */
 void gpio_pin_lock(uint32_t gpio_periph, uint32_t pin);
 /* configure the I/O compensation cell */
-void gpio_compensation_config(uint32_t compensation);
+void gpio_compensation_config(uint32_t compensation); 
 /* check the I/O compensation cell is ready or not */
 FlagStatus gpio_compensation_flag_get(void);
 

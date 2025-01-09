@@ -2,35 +2,33 @@
     \file    drv_usbd_int.c
     \brief   USB device mode interrupt routines
 
-    \version 2020-08-01, V3.0.0, firmware for GD32F4xx
-    \version 2022-03-09, V3.1.0, firmware for GD32F4xx
-    \version 2022-06-30, V3.2.0, firmware for GD32F4xx
+    \version 2024-01-15, V3.2.0, firmware for GD32F4xx
 */
 
 /*
-    Copyright (c) 2022, GigaDevice Semiconductor Inc.
+    Copyright (c) 2024, GigaDevice Semiconductor Inc.
 
-    Redistribution and use in source and binary forms, with or without modification,
+    Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this
+    1. Redistributions of source code must retain the above copyright notice, this 
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice,
-       this list of conditions and the following disclaimer in the documentation
+    2. Redistributions in binary form must reproduce the above copyright notice, 
+       this list of conditions and the following disclaimer in the documentation 
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors
-       may be used to endorse or promote products derived from this software without
+    3. Neither the name of the copyright holder nor the names of its contributors 
+       may be used to endorse or promote products derived from this software without 
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
 OF SUCH DAMAGE.
 */
 
@@ -88,8 +86,10 @@ void usbd_isr (usb_core_driver *udev)
 
         /* wakeup interrupt */
         if (intr & GINTF_WKUPIF) {
-            /* inform upper layer by the resume event */
-            udev->dev.cur_status = USBD_CONFIGURED;
+            if(USBD_SUSPENDED == udev->dev.cur_status){
+                /* inform upper layer by the resume event */
+                udev->dev.cur_status = udev->dev.backup_status;
+            }
 
             /* clear interrupt */
             udev->regs.gr->GINTF = GINTF_WKUPIF;
@@ -182,11 +182,12 @@ uint32_t usbd_int_dedicated_ep1out (usb_core_driver *udev)
         udev->regs.er_out[1]->DOEPINTF = DOEPINTF_TF;
 
         if(USB_USE_DMA == udev->bp.transfer_mode){
+            usb_transc *transc = &udev->dev.transc_out[1];
+            uint32_t set_len = ((transc->xfer_len + transc->max_len - 1U) / transc->max_len) * transc->max_len;
             oeplen = udev->regs.er_out[1]->DOEPLEN;
 
             /* to do : handle more than one single max packet size packet */
-            udev->dev.transc_out[1].xfer_count = udev->dev.transc_out[1].max_len - \
-                                    (oeplen & DEPLEN_TLEN);
+            udev->dev.transc_out[1].xfer_count = set_len - (oeplen & DEPLEN_TLEN);
         }
 
         /* rx complete */
@@ -254,10 +255,11 @@ static uint32_t usbd_int_epout (usb_core_driver *udev)
                 udev->regs.er_out[ep_num]->DOEPINTF = DOEPINTF_TF;
 
                 if ((uint8_t)USB_USE_DMA == udev->bp.transfer_mode) {
+                    usb_transc *transc = &udev->dev.transc_out[ep_num];
                     __IO uint32_t eplen = udev->regs.er_out[ep_num]->DOEPLEN;
+                    uint32_t set_len = ((transc->xfer_len + transc->max_len - 1U) / transc->max_len) * transc->max_len;
 
-                    udev->dev.transc_out[ep_num].xfer_count = udev->dev.transc_out[ep_num].max_len - \
-                                                                (eplen & DEPLEN_TLEN);
+                    udev->dev.transc_out[ep_num].xfer_count = set_len - (eplen & DEPLEN_TLEN);
                 }
 
                 /* inform upper layer: data ready */

@@ -2,33 +2,33 @@
     \file    printer_core.c
     \brief   USB printer device class core functions
 
-    \version 2020-08-01, V3.0.0, firmware for GD32F30x
+    \version 2023-06-30, V2.1.6, firmware for GD32F30x
 */
 
 /*
     Copyright (c) 2020, GigaDevice Semiconductor Inc.
 
-    Redistribution and use in source and binary forms, with or without modification,
+    Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this
+    1. Redistributions of source code must retain the above copyright notice, this 
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice,
-       this list of conditions and the following disclaimer in the documentation
+    2. Redistributions in binary form must reproduce the above copyright notice, 
+       this list of conditions and the following disclaimer in the documentation 
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors
-       may be used to endorse or promote products derived from this software without
+    3. Neither the name of the copyright holder nor the names of its contributors 
+       may be used to endorse or promote products derived from this software without 
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
 OF SUCH DAMAGE.
 */
 
@@ -60,9 +60,9 @@ uint8_t PRINTER_DEVICE_ID[DEVICE_ID_LEN] =
 /* USB standard device descriptor */
 const usb_desc_dev printer_dev_desc =
 {
-    .header =
+    .header = 
      {
-         .bLength          = USB_DEV_DESC_LEN,
+         .bLength          = USB_DEV_DESC_LEN, 
          .bDescriptorType  = USB_DESCTYPE_DEV,
      },
     .bcdUSB                = 0x0200U,
@@ -79,13 +79,13 @@ const usb_desc_dev printer_dev_desc =
     .bNumberConfigurations = USBD_CFG_MAX_NUM,
 };
 /* USB device configuration descriptor */
-const usb_printer_desc_config_set printer_config_desc =
+const usb_printer_desc_config_set printer_config_desc = 
 {
-    .config =
+    .config = 
     {
-        .header =
+        .header = 
          {
-             .bLength         = sizeof(usb_desc_config),
+             .bLength         = sizeof(usb_desc_config), 
              .bDescriptorType = USB_DESCTYPE_CONFIG
          },
         .wTotalLength         = USB_PRINTER_CONFIG_DESC_LEN,
@@ -96,12 +96,12 @@ const usb_printer_desc_config_set printer_config_desc =
         .bMaxPower            = 0x32U
     },
 
-    .printer_itf =
+    .printer_itf = 
     {
-        .header =
+        .header = 
          {
-             .bLength         = sizeof(usb_desc_itf),
-             .bDescriptorType =  USB_DESCTYPE_ITF
+             .bLength         = sizeof(usb_desc_itf), 
+             .bDescriptorType =  USB_DESCTYPE_ITF 
          },
         .bInterfaceNumber     = 0x00U,
         .bAlternateSetting    = 0x00U,
@@ -112,12 +112,12 @@ const usb_printer_desc_config_set printer_config_desc =
         .iInterface           = 0x00U
     },
 
-    .printer_epin =
+    .printer_epin = 
     {
-        .header =
+        .header = 
          {
-             .bLength         = sizeof(usb_desc_ep),
-             .bDescriptorType = USB_DESCTYPE_EP
+             .bLength         = sizeof(usb_desc_ep), 
+             .bDescriptorType = USB_DESCTYPE_EP 
          },
         .bEndpointAddress     = PRINTER_IN_EP,
         .bmAttributes         = USB_EP_ATTR_BULK,
@@ -125,12 +125,12 @@ const usb_printer_desc_config_set printer_config_desc =
         .bInterval            = 0x00U
     },
 
-    .printer_epout =
+    .printer_epout = 
     {
-        .header =
+        .header = 
          {
-             .bLength         = sizeof(usb_desc_ep),
-             .bDescriptorType = USB_DESCTYPE_EP
+             .bLength         = sizeof(usb_desc_ep), 
+             .bDescriptorType = USB_DESCTYPE_EP 
          },
         .bEndpointAddress     = PRINTER_OUT_EP,
         .bmAttributes         = USB_EP_ATTR_BULK,
@@ -140,50 +140,50 @@ const usb_printer_desc_config_set printer_config_desc =
 };
 
 /* USB language ID Descriptor */
-static const usb_desc_LANGID usbd_language_id_desc =
+static const usb_desc_LANGID usbd_language_id_desc = 
 {
-    .header =
+    .header = 
      {
-         .bLength         = sizeof(usb_desc_LANGID),
+         .bLength         = sizeof(usb_desc_LANGID), 
          .bDescriptorType = USB_DESCTYPE_STR,
      },
     .wLANGID              = ENG_LANGID
 };
 
 /* USB manufacture string */
-static const usb_desc_str manufacturer_string =
+static const usb_desc_str manufacturer_string = 
 {
-    .header =
+    .header = 
      {
-         .bLength         = USB_STRING_LEN(10U),
+         .bLength         = USB_STRING_LEN(10U), 
          .bDescriptorType = USB_DESCTYPE_STR,
      },
     .unicode_string = {'G', 'i', 'g', 'a', 'D', 'e', 'v', 'i', 'c', 'e'}
 };
 
 /* USB product string */
-static const usb_desc_str product_string =
+static const usb_desc_str product_string = 
 {
-    .header =
+    .header = 
      {
-         .bLength         = USB_STRING_LEN(16U),
+         .bLength         = USB_STRING_LEN(16U), 
          .bDescriptorType = USB_DESCTYPE_STR,
      },
     .unicode_string = {'G', 'D', '3', '2', '-', 'U', 'S', 'B', '_', 'P', 'r', 'i', 'n', 't', 'e', 'r'}
 };
 
 /* USBD serial string */
-static usb_desc_str serial_string =
+static usb_desc_str serial_string = 
 {
-    .header =
+    .header = 
      {
-         .bLength         = USB_STRING_LEN(12U),
+         .bLength         = USB_STRING_LEN(12U), 
          .bDescriptorType = USB_DESCTYPE_STR,
      }
 };
 
 /* USB string descriptor */
-static void *const usbd_msc_strings[] =
+static void *const usbd_msc_strings[] = 
 {
     [STR_IDX_LANGID]  = (uint8_t *)&usbd_language_id_desc,
     [STR_IDX_MFC]     = (uint8_t *)&manufacturer_string,
@@ -278,7 +278,7 @@ static uint8_t printer_req(usb_dev *udev, usb_req *req)
         break;
 
     default:
-        return USBD_FAIL;
+        return USBD_FAIL; 
     }
 
     return USBD_OK;

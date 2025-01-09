@@ -2,33 +2,33 @@
     \file    custom_hid_core.c
     \brief   custom HID class driver
 
-    \version 2020-08-01, V3.0.0, firmware for GD32F30x
+    \version 2023-06-30, V2.1.6, firmware for GD32F30x
 */
 
 /*
-    Copyright (c) 2020, GigaDevice Semiconductor Inc.
+    Copyright (c) 2023, GigaDevice Semiconductor Inc.
 
-    Redistribution and use in source and binary forms, with or without modification,
+    Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this
+    1. Redistributions of source code must retain the above copyright notice, this 
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice,
-       this list of conditions and the following disclaimer in the documentation
+    2. Redistributions in binary form must reproduce the above copyright notice, 
+       this list of conditions and the following disclaimer in the documentation 
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors
-       may be used to endorse or promote products derived from this software without
+    3. Neither the name of the copyright holder nor the names of its contributors 
+       may be used to endorse or promote products derived from this software without 
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
 OF SUCH DAMAGE.
 */
 
@@ -43,9 +43,9 @@ OF SUCH DAMAGE.
 /* USB standard device descriptor */
 usb_desc_dev custom_hid_dev_desc =
 {
-    .header =
+    .header = 
      {
-         .bLength          = USB_DEV_DESC_LEN,
+         .bLength          = USB_DEV_DESC_LEN, 
          .bDescriptorType  = USB_DESCTYPE_DEV,
      },
     .bcdUSB                = 0x0200U,
@@ -62,14 +62,15 @@ usb_desc_dev custom_hid_dev_desc =
     .bNumberConfigurations = USBD_CFG_MAX_NUM,
 };
 
-usb_hid_desc_config_set custom_hid_config_desc =
+/* USB device configure descriptor */
+usb_hid_desc_config_set custom_hid_config_desc = 
 {
-    .config =
+    .config = 
     {
-        .header =
+        .header = 
          {
-             .bLength         = sizeof(usb_desc_config),
-             .bDescriptorType = USB_DESCTYPE_CONFIG
+             .bLength         = sizeof(usb_desc_config), 
+             .bDescriptorType = USB_DESCTYPE_CONFIG 
          },
         .wTotalLength         = DESC_LEN_CONFIG,
         .bNumInterfaces       = 0x01U,
@@ -79,12 +80,12 @@ usb_hid_desc_config_set custom_hid_config_desc =
         .bMaxPower            = 0x32U
     },
 
-    .hid_itf =
+    .hid_itf = 
     {
-        .header =
+        .header = 
          {
-             .bLength         = sizeof(usb_desc_itf),
-             .bDescriptorType = USB_DESCTYPE_ITF
+             .bLength         = sizeof(usb_desc_itf), 
+             .bDescriptorType = USB_DESCTYPE_ITF 
          },
         .bInterfaceNumber     = 0x00U,
         .bAlternateSetting    = 0x00U,
@@ -95,12 +96,12 @@ usb_hid_desc_config_set custom_hid_config_desc =
         .iInterface           = 0x00U
     },
 
-    .hid_vendor =
+    .hid_vendor = 
     {
-        .header =
+        .header = 
          {
              .bLength         = sizeof(usb_desc_hid),
-             .bDescriptorType = USB_DESCTYPE_HID
+             .bDescriptorType = USB_DESCTYPE_HID 
          },
         .bcdHID               = 0x0111U,
         .bCountryCode         = 0x00U,
@@ -109,12 +110,12 @@ usb_hid_desc_config_set custom_hid_config_desc =
         .wDescriptorLength    = DESC_LEN_REPORT,
     },
 
-    .hid_epin =
+    .hid_epin = 
     {
-        .header =
+        .header = 
          {
-             .bLength         = sizeof(usb_desc_ep),
-             .bDescriptorType = USB_DESCTYPE_EP
+             .bLength         = sizeof(usb_desc_ep), 
+             .bDescriptorType = USB_DESCTYPE_EP 
          },
         .bEndpointAddress     = CUSTOMHID_IN_EP,
         .bmAttributes         = USB_EP_ATTR_INT,
@@ -122,11 +123,11 @@ usb_hid_desc_config_set custom_hid_config_desc =
         .bInterval            = 0x20U
     },
 
-    .hid_epout =
+    .hid_epout = 
     {
-        .header =
+        .header = 
          {
-             .bLength         = sizeof(usb_desc_ep),
+             .bLength         = sizeof(usb_desc_ep), 
              .bDescriptorType = USB_DESCTYPE_EP
          },
         .bEndpointAddress     = CUSTOMHID_OUT_EP,
@@ -137,50 +138,50 @@ usb_hid_desc_config_set custom_hid_config_desc =
 };
 
 /* USB language ID descriptor */
-static usb_desc_LANGID usbd_language_id_desc =
+static usb_desc_LANGID usbd_language_id_desc = 
 {
-    .header =
+    .header = 
      {
-         .bLength = sizeof(usb_desc_LANGID),
+         .bLength = sizeof(usb_desc_LANGID), 
          .bDescriptorType = USB_DESCTYPE_STR
      },
     .wLANGID = ENG_LANGID
 };
 
 /* USB manufacture string */
-static usb_desc_str manufacturer_string =
+static usb_desc_str manufacturer_string = 
 {
-    .header =
+    .header = 
      {
-         .bLength         = USB_STRING_LEN(10U),
+         .bLength         = USB_STRING_LEN(10U), 
          .bDescriptorType = USB_DESCTYPE_STR,
      },
     .unicode_string = {'G', 'i', 'g', 'a', 'D', 'e', 'v', 'i', 'c', 'e'}
 };
 
 /* USB product string */
-static usb_desc_str product_string =
+static usb_desc_str product_string = 
 {
-    .header =
+    .header = 
      {
-         .bLength         = USB_STRING_LEN(14U),
+         .bLength         = USB_STRING_LEN(14U), 
          .bDescriptorType = USB_DESCTYPE_STR,
      },
     .unicode_string = {'G', 'D', '3', '2', '-', 'C', 'u', 's', 't', 'o', 'm', 'H', 'I', 'D'}
 };
 
-/* USBD serial string */
-static usb_desc_str serial_string =
+/* USB serial string */
+static usb_desc_str serial_string = 
 {
-    .header =
+    .header = 
      {
-         .bLength         = USB_STRING_LEN(12U),
+         .bLength         = USB_STRING_LEN(12U), 
          .bDescriptorType = USB_DESCTYPE_STR,
      }
 };
 
 /* USB string descriptor set */
-uint8_t* usbd_hid_strings[] =
+uint8_t* usbd_hid_strings[] = 
 {
     [STR_IDX_LANGID]  = (uint8_t *)&usbd_language_id_desc,
     [STR_IDX_MFC]     = (uint8_t *)&manufacturer_string,
@@ -188,7 +189,8 @@ uint8_t* usbd_hid_strings[] =
     [STR_IDX_SERIAL]  = (uint8_t *)&serial_string
 };
 
-usb_desc custom_hid_desc = {
+usb_desc custom_hid_desc = 
+{
     .dev_desc    = (uint8_t *)&custom_hid_dev_desc,
     .config_desc = (uint8_t *)&custom_hid_config_desc,
     .strings     = usbd_hid_strings
@@ -313,7 +315,7 @@ uint8_t custom_hid_report_send (usb_dev *udev, uint8_t *report, uint16_t len)
 
 /*!
     \brief      initialize the HID device
-    \param[in]  pudev: pointer to USB device instance
+    \param[in]  udev: pointer to USB device instance
     \param[in]  config_index: configuration index
     \param[out] none
     \retval     USB device operation status
@@ -378,12 +380,17 @@ static uint8_t custom_hid_req_handler (usb_dev *udev, usb_req *req)
     switch (req->bRequest) {
     case USB_GET_DESCRIPTOR:
         if (USB_DESCTYPE_REPORT == (req->wValue >> 8)) {
-            usb_transc_config(&udev->transc_in[0],
-                              (uint8_t *)customhid_report_descriptor,
-                              USB_MIN(DESC_LEN_REPORT, req->wLength),
+            usb_transc_config(&udev->transc_in[0], 
+                              (uint8_t *)customhid_report_descriptor, 
+                              USB_MIN(DESC_LEN_REPORT, req->wLength), 
                               0U);
 
             status = REQ_SUPP;
+        } else if (USB_DESCTYPE_HID == (req->wValue >> 8U)) {
+            usb_transc_config(&udev->transc_in[0U], 
+                              (uint8_t *)(&(custom_hid_config_desc.hid_vendor)), 
+                              USB_MIN(9U, req->wLength), 
+                              0U);
         }
         break;
 
@@ -458,11 +465,10 @@ static void custom_hid_data_out (usb_dev *udev, uint8_t ep_num)
     custom_hid_handler *hid = (custom_hid_handler *)udev->class_data[CUSTOM_HID_INTERFACE];
 
     if (CUSTOMHID_OUT_EP == ep_num){
-
         switch (hid->data[0]){
         case 0x11:
             if (RESET != hid->data[1]) {
-                /* turn on led1  */
+                /* turn on led5  */
                 gd_eval_led_on(LED5);
             } else {
                 gd_eval_led_off(LED5);
@@ -491,13 +497,13 @@ static void custom_hid_data_out (usb_dev *udev, uint8_t ep_num)
             break;
         default:
             /* turn off all leds */
-            gd_eval_led_off(LED5);
             gd_eval_led_off(LED2);
             gd_eval_led_off(LED3);
             gd_eval_led_off(LED4);
+            gd_eval_led_off(LED5);
             break;
         }
 
-        usbd_ep_recev(udev, CUSTOMHID_IN_EP, hid->data, 2U);
+        usbd_ep_recev(udev, CUSTOMHID_OUT_EP, hid->data, 2U);
     }
 }

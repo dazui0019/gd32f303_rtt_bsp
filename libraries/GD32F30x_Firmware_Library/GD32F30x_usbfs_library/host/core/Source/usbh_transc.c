@@ -2,33 +2,33 @@
     \file    usbh_transc.c
     \brief   USB host mode transactions driver
 
-    \version 2020-08-01, V3.0.0, firmware for GD32F30x
+    \version 2023-06-30, V2.1.6, firmware for GD32F30x
 */
 
 /*
-    Copyright (c) 2020, GigaDevice Semiconductor Inc.
+    Copyright (c) 2023, GigaDevice Semiconductor Inc.
 
-    Redistribution and use in source and binary forms, with or without modification,
+    Redistribution and use in source and binary forms, with or without modification, 
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this
+    1. Redistributions of source code must retain the above copyright notice, this 
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice,
-       this list of conditions and the following disclaimer in the documentation
+    2. Redistributions in binary form must reproduce the above copyright notice, 
+       this list of conditions and the following disclaimer in the documentation 
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors
-       may be used to endorse or promote products derived from this software without
+    3. Neither the name of the copyright holder nor the names of its contributors 
+       may be used to endorse or promote products derived from this software without 
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
 OF SUCH DAMAGE.
 */
 
@@ -220,7 +220,9 @@ usbh_status usbh_ctl_handler (usbh_host *puhost)
 */
 static usb_urb_state usbh_urb_wait (usbh_host *puhost, uint8_t pp_num, uint32_t wait_time)
 {
+    uint32_t timeout = 0U;
     usb_urb_state urb_status = URB_IDLE;
+    timeout = puhost->control.timer;
 
     while (URB_DONE != (urb_status = usbh_urbstate_get(puhost->data, pp_num))) {
         if (URB_NOTREADY == urb_status) {
@@ -231,7 +233,7 @@ static usb_urb_state usbh_urb_wait (usbh_host *puhost, uint8_t pp_num, uint32_t 
         } else if (URB_ERROR == urb_status) {
             puhost->control.ctl_state = CTL_ERROR;
             break;
-        } else if ((wait_time > 0U) && ((usb_curframe_get(puhost->data)- puhost->control.timer) > wait_time)) {
+        } else if ((wait_time > 0U) && ((puhost->control.timer - timeout) > wait_time)){
             /* timeout for in transfer */
             puhost->control.ctl_state = CTL_ERROR;
             break;
@@ -252,8 +254,8 @@ static usb_urb_state usbh_urb_wait (usbh_host *puhost, uint8_t pp_num, uint32_t 
 static void usbh_setup_transc (usbh_host *puhost)
 {
     /* send a SETUP packet */
-    usbh_ctlsetup_send (puhost->data,
-                        puhost->control.setup.data,
+    usbh_ctlsetup_send (puhost->data, 
+                        puhost->control.setup.data, 
                         puhost->control.pipe_out_num);
 
     if (URB_DONE == usbh_urb_wait (puhost, puhost->control.pipe_out_num, 0U)) {
@@ -273,8 +275,6 @@ static void usbh_setup_transc (usbh_host *puhost)
             }
         }
 
-        /* set the delay timer to enable timeout for data stage completion */
-        puhost->control.timer = (uint16_t)usb_curframe_get(puhost->data);
     }
 }
 
@@ -294,7 +294,6 @@ static void usbh_data_in_transc (usbh_host *puhost)
     if (URB_DONE == usbh_urb_wait (puhost, puhost->control.pipe_in_num, DATA_STAGE_TIMEOUT)) {
         puhost->control.ctl_state = CTL_STATUS_OUT;
 
-        puhost->control.timer = (uint16_t)usb_curframe_get(puhost->data);
     }
 }
 
@@ -316,7 +315,6 @@ static void usbh_data_out_transc (usbh_host *puhost)
     if (URB_DONE == usbh_urb_wait (puhost, puhost->control.pipe_out_num, DATA_STAGE_TIMEOUT)) {
         puhost->control.ctl_state = CTL_STATUS_IN;
 
-        puhost->control.timer = (uint16_t)usb_curframe_get(puhost->data);
     }
 }
 
@@ -361,7 +359,7 @@ static void usbh_status_out_transc (usbh_host *puhost)
     \param[out] none
     \retval     operation status
 */
-static uint32_t usbh_request_submit (usb_core_driver *pudev, uint8_t pp_num)
+static uint32_t usbh_request_submit (usb_core_driver *pudev, uint8_t pp_num) 
 {
     pudev->host.pipe[pp_num].urb_state = URB_IDLE;
     pudev->host.pipe[pp_num].xfer_count = 0U;
