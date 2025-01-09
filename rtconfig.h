@@ -126,6 +126,20 @@
 
 /* Utilities */
 
+#define RT_USING_ULOG
+#define ULOG_OUTPUT_LVL_E
+#define ULOG_OUTPUT_LVL 3
+#define ULOG_ASSERT_ENABLE
+#define ULOG_LINE_BUF_SIZE 128
+
+/* log format */
+
+#define ULOG_USING_COLOR
+#define ULOG_OUTPUT_TIME
+#define ULOG_OUTPUT_LEVEL
+#define ULOG_OUTPUT_TAG
+/* end of log format */
+#define ULOG_BACKEND_USING_CONSOLE
 /* end of Utilities */
 /* end of RT-Thread Components */
 
@@ -313,7 +327,7 @@
 /* Hardware Drivers Config */
 
 #define SOC_SERIES_GD32F30x
-#define SOC_GD32303Z
+#define SOC_GD32303ZE
 
 /* Onboard Peripheral Drivers */
 
@@ -324,7 +338,7 @@
 #define BSP_USING_SPI
 #define BSP_USING_SPI1
 #define BSP_USING_UART
-#define BSP_USING_UART1
+#define BSP_USING_UART0
 /* end of On-chip Peripheral Drivers */
 
 /* Board extended module Drivers */

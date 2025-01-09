@@ -42,6 +42,8 @@
 #include <drivers/pin.h>
 #include <drv_spi.h>
 
+#define DEVICE_NAME "spi10"
+
 struct rt_spi_device *w25q64 = RT_NULL;
 struct rt_spi_configuration spi_cfg = {
     .mode = RT_SPI_MASTER | RT_SPI_MODE_0 | RT_SPI_MSB,
@@ -59,12 +61,12 @@ struct rt_spi_configuration spi_cfg = {
 uint8_t w25qxx_interface_spi_qspi_init(void)
 {
     rt_err_t ret = RT_EOK;
-    ret = rt_hw_spi_device_attach("spi1", "spi10", GET_PIN(B, 12));
+    ret = rt_hw_spi_device_attach("spi1", DEVICE_NAME, GET_PIN(B, 12));
     if (ret != RT_EOK)
     {
         return 1;
     }
-    w25q64 = (struct rt_spi_device *)rt_device_find("spi10");
+    w25q64 = (struct rt_spi_device *)rt_device_find(DEVICE_NAME);
     ret = rt_spi_configure(w25q64, &spi_cfg);
     if (ret != RT_EOK)
     {
@@ -116,7 +118,7 @@ uint8_t w25qxx_interface_spi_qspi_write_read(uint8_t instruction, uint8_t instru
     {
         return 1;
     }
-    rt_spi_send_then_recv(w25q64, out_buf, out_len, in_buf, in_len);
+    rt_spi_send_then_recv(w25q64, in_buf, in_len, out_buf, out_len);
     return 0;
 }
 
